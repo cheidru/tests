@@ -5,13 +5,27 @@ BTN.addEventListener('click', testFoo);
 
 async function testFoo() {
     let msg = '';
-    msg += 'Hello boys!' + '/n';
+    // First message added
+    msg += 'Hello boys!';
+    disp.innerHTML = msg;
+
+    // async function declaration
     let sayHello = new Promise(function (res, rej) {
-        setTimeout(() => res(msg += 'Hello girls!' + '/n'), 5000);
+        // async message added in 5 sec
+        function showCase() {
+            msg += '<br>Hello girls!';
+            disp.innerHTML = msg;
+            return `Hello Bob!`;
+        }
+        setTimeout(() => res(showCase()), 5000);
     })
 
-    await sayHello;
-    msg += 'Hello puppy!' + '/n';
+    // async function call
+    let hiBob = await sayHello;
 
-    disp.textContent = msg;
+    // last message added
+    msg += '<br>Hello puppy!';
+    disp.innerHTML = msg;
+
+    disp.innerHTML += hiBob;
 }
